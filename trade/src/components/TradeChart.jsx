@@ -9,10 +9,9 @@ export default function TradeChart({ data, title }) {
     <Box sx={{ width: "100%", height: "100%", display: "flex", flexDirection: "column", minHeight: '350px' }}>
       {title && <Typography variant="h6" sx={{ mb: 2, color: "white", fontWeight: 700 }}>{title}</Typography>}
       
-      <Box sx={{ flexGrow: 1, width: '100%', height: '100%', minHeight: '300px' }}>
+      <Box sx={{ flexGrow: 1, width: '100%', height: '100%', minHeight: '350px', position: 'relative' }}>
         {hasData ? (
-          // FIX: Using debounce and a slightly smaller width percentage often forces the container to re-measure properly
-          <ResponsiveContainer width="99.9%" height="100%" debounce={1}> 
+          <ResponsiveContainer width="100%" height="100%" minHeight={350}> 
             <AreaChart data={data} margin={{ top: 10, right: 10, left: -20, bottom: 0 }}>
               <defs>
                 <linearGradient id="colorPrice" x1="0" y1="0" x2="0" y2="1">
@@ -31,7 +30,7 @@ export default function TradeChart({ data, title }) {
             </AreaChart>
           </ResponsiveContainer>
         ) : (
-          <Box sx={{ height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+          <Box sx={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
             <Typography color="rgba(255,255,255,0.3)">Synchronizing Neural Network...</Typography>
           </Box>
         )}

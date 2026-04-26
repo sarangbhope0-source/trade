@@ -63,11 +63,13 @@ export default function Dashboard() {
       smartphone: { smooth: true }, tablet: { smooth: true }
     });
     const timer = setTimeout(() => { 
-        if (scrollInstance && typeof scrollInstance.update === 'function') scrollInstance.update(); 
+        if (scrollInstance && typeof scrollInstance.update === 'function') {
+            scrollInstance.update();
+        }
     }, 1000);
     return () => {
-        clearTimeout(timer);
-        scrollInstance.destroy();
+        if (timer) clearTimeout(timer);
+        if (scrollInstance) scrollInstance.destroy();
     };
   }, [metrics.chart]);
 
@@ -117,18 +119,19 @@ export default function Dashboard() {
                 onChange={(e, val) => setSelectedStock(val)}
                 getOptionLabel={(opt) => `${opt.label} (${opt.code})`}
                 sx={{ width: { xs: 240, md: 450 } }}
-                renderInput={(params) => {
-                  // FIX: Explicitly destructure to prevent InputProps from leaking to the DOM
-                  const { InputProps, ...restParams } = params;
-                  return (
-                    <TextField 
-                      {...restParams} 
-                      variant="standard" 
-                      sx={{ px: 2, "& .MuiInputBase-root": { color: "white", fontSize: '1.1rem' } }} 
-                      InputProps={{ ...InputProps, disableUnderline: true }}
-                    />
-                  );
-                }}
+                renderInput={(params) => (
+                  <TextField 
+                    {...params} 
+                    variant="standard" 
+                    sx={{ px: 2, "& .MuiInputBase-root": { color: "white", fontSize: '1.1rem' } }} 
+                    slotProps={{
+                      input: {
+                        ...params.InputProps,
+                        disableUnderline: true
+                      }
+                    }}
+                  />
+                )}
               />
               <Button variant="contained" onClick={fetchAI} sx={{ bgcolor: '#6366f1', borderRadius: 2, px: 4 }}>
                 {loading ? <CircularProgress size={24} color="inherit" /> : <RefreshCw size={24} />}
@@ -139,10 +142,10 @@ export default function Dashboard() {
 
         {/* FIX: Ensure Grid items use numeric/string values for props where possible to avoid 'item' warning */}
         <Grid container spacing={3} sx={{ mb: 6 }}>
-          <Grid item xs={12} sm={6} md={3}><StatCard title="Portfolio Value" value={metrics.portfolio} icon={Wallet} color="#6366f1" delay={0.1} isCurrency /></Grid>
-          <Grid item xs={12} sm={6} md={3}><StatCard title="Live P/L" value={metrics.profit} icon={metrics.profit >= 0 ? TrendingUp : TrendingDown} color={metrics.profit >= 0 ? "#10b981" : "#f87171"} delay={0.2} isCurrency /></Grid>
-          <Grid item xs={12} sm={6} md={3}><StatCard title="AI Accuracy" value={metrics.accuracy} icon={Award} color="#f59e0b" delay={0.3} /></Grid>
-          <Grid item xs={12} sm={6} md={3}><StatCard title="AI Signal" value={metrics.prediction === 1 ? "BUY" : "SELL"} icon={Zap} color={metrics.prediction === 1 ? "#10b981" : "#f87171"} delay={0.4} /></Grid>
+          <Grid xs={12} sm={6} md={3}><StatCard title="Portfolio Value" value={metrics.portfolio} icon={Wallet} color="#6366f1" delay={0.1} isCurrency /></Grid>
+          <Grid xs={12} sm={6} md={3}><StatCard title="Live P/L" value={metrics.profit} icon={metrics.profit >= 0 ? TrendingUp : TrendingDown} color={metrics.profit >= 0 ? "#10b981" : "#f87171"} delay={0.2} isCurrency /></Grid>
+          <Grid xs={12} sm={6} md={3}><StatCard title="AI Accuracy" value={metrics.accuracy} icon={Award} color="#f59e0b" delay={0.3} /></Grid>
+          <Grid xs={12} sm={6} md={3}><StatCard title="AI Signal" value={metrics.prediction === 1 ? "BUY" : "SELL"} icon={Zap} color={metrics.prediction === 1 ? "#10b981" : "#f87171"} delay={0.4} /></Grid>
         </Grid>
 
         <Box data-scroll data-scroll-speed="0.5" sx={{ mb: 6 }}>
@@ -170,7 +173,7 @@ export default function Dashboard() {
         </Box>
 
         <Grid container spacing={3} data-scroll data-scroll-speed="1">
-          <Grid item xs={12} md={4}>
+          <Grid xs={12} md={4}>
             <Paper sx={{ p: 4, height: '100%', background: "rgba(255,255,255,0.02)", border: "1px solid rgba(255,255,255,0.05)", borderRadius: 6 }}>
               <Box sx={{ display: 'flex', alignItems: 'center', gap: 2, mb: 3 }}>
                 <Activity size={24} color="#6366f1" />
@@ -181,7 +184,7 @@ export default function Dashboard() {
               </Typography>
             </Paper>
           </Grid>
-          <Grid item xs={12} md={4}>
+          <Grid xs={12} md={4}>
             <Paper sx={{ p: 4, height: '100%', background: "rgba(255,255,255,0.02)", border: "1px solid rgba(255,255,255,0.05)", borderRadius: 6 }}>
               <Box sx={{ display: 'flex', alignItems: 'center', gap: 2, mb: 3 }}>
                 <ShieldCheck size={24} color="#10b981" />
@@ -192,7 +195,7 @@ export default function Dashboard() {
               </Typography>
             </Paper>
           </Grid>
-          <Grid item xs={12} md={4}>
+          <Grid xs={12} md={4}>
             <Paper sx={{ p: 4, height: '100%', background: "rgba(255,255,255,0.02)", border: "1px solid rgba(255,255,255,0.05)", borderRadius: 6 }}>
               <Box sx={{ display: 'flex', alignItems: 'center', gap: 2, mb: 3 }}>
                 <Cpu size={24} color="#f59e0b" />
