@@ -14,8 +14,11 @@ import { motion } from "framer-motion";
 import SettingsIcon from "@mui/icons-material/Settings";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import ShowChartIcon from "@mui/icons-material/ShowChart";
+import { useColorMode } from "../context/ThemeContext";
 
 export default function Settings() {
+  const { mode, toggleColorMode } = useColorMode();
+
   return (
     <Box sx={{ maxWidth: 800, mx: "auto" }}>
       
@@ -27,6 +30,7 @@ export default function Settings() {
       >
         <SettingsIcon /> Settings
       </Typography>
+// (rest of the file remains, using the toggleColorMode in the switch)
 
       <Grid container spacing={3}>
 
@@ -37,8 +41,8 @@ export default function Settings() {
               sx={{
                 p: 3,
                 borderRadius: 3,
-                background: "linear-gradient(135deg, #1e1e2f, #2a2a40)",
-                color: "#fff"
+                background: (theme) => theme.palette.mode === 'dark' ? "linear-gradient(135deg, #1e1e2f, #2a2a40)" : "linear-gradient(135deg, #f1f5f9, #e2e8f0)",
+                color: "text.primary"
               }}
             >
               <Typography variant="h6" gutterBottom>
@@ -56,7 +60,7 @@ export default function Settings() {
               />
 
               <FormControlLabel
-                control={<Switch />}
+                control={<Switch checked={mode === 'dark'} onChange={toggleColorMode} />}
                 label="Dark Mode"
               />
             </Paper>
@@ -70,8 +74,8 @@ export default function Settings() {
               sx={{
                 p: 3,
                 borderRadius: 3,
-                background: "linear-gradient(135deg, #16222a, #3a6073)",
-                color: "#fff"
+                background: (theme) => theme.palette.mode === 'dark' ? "linear-gradient(135deg, #16222a, #3a6073)" : "linear-gradient(135deg, #ecfeff, #cffafe)",
+                color: "text.primary"
               }}
             >
               <Typography variant="h6" gutterBottom>
@@ -114,8 +118,8 @@ export default function Settings() {
               sx={{
                 p: 3,
                 borderRadius: 3,
-                background: "linear-gradient(135deg, #42275a, #734b6d)",
-                color: "#fff"
+                background: (theme) => theme.palette.mode === 'dark' ? "linear-gradient(135deg, #42275a, #734b6d)" : "linear-gradient(135deg, #f3e8ff, #e9d5ff)",
+                color: "text.primary"
               }}
             >
               <Typography variant="h6">Security</Typography>

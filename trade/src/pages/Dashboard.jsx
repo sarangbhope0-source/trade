@@ -27,15 +27,17 @@ const StatCard = ({ title, value, icon: Icon, color, delay, isCurrency = false }
       transition={{ duration: 0.7, delay, ease: "easeOut" }}
     >
       <Paper sx={{ 
-        p: 3, background: "rgba(15, 18, 26, 0.7)", backdropFilter: "blur(12px)", 
+        p: 3, 
+        background: (theme) => theme.palette.mode === 'dark' ? "rgba(15, 18, 26, 0.7)" : "rgba(255, 255, 255, 0.7)", 
+        backdropFilter: "blur(12px)", 
         border: "1px solid rgba(255, 255, 255, 0.1)", borderRadius: 4,
         transition: "all 0.3s ease",
         "&:hover": { border: `1px solid ${color}`, boxShadow: `0 0 25px ${color}20`, transform: "translateY(-5px)" }
       }}>
         <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
           <Box>
-            <Typography variant="caption" sx={{ color: "rgba(255,255,255,0.5)", fontWeight: 700, textTransform: 'uppercase' }}>{title}</Typography>
-            <Typography variant="h4" sx={{ color: "#fff", fontWeight: 800, mt: 1 }}>
+            <Typography variant="caption" sx={{ color: "text.secondary", fontWeight: 700, textTransform: 'uppercase' }}>{title}</Typography>
+            <Typography variant="h4" sx={{ color: "text.primary", fontWeight: 800, mt: 1 }}>
               {isCurrency ? `$${displayValue.toLocaleString(undefined, { minimumFractionDigits: 2 })}` : `${displayValue}%`}
             </Typography>
           </Box>
@@ -96,7 +98,7 @@ export default function Dashboard() {
   useEffect(() => { fetchAI(); }, [selectedStock]);
 
   return (
-    <Box ref={scrollRef} data-scroll-container sx={{ background: "#0b0e14", color: "white", minHeight: '100vh', overflowX: 'hidden' }}>
+    <Box ref={scrollRef} data-scroll-container sx={{ background: "background.default", color: "text.primary", minHeight: '100vh', overflowX: 'hidden' }}>
       <motion.div style={{ scaleX, position: "fixed", top: 0, left: 0, right: 0, height: 4, background: "#6366f1", originX: 0, zIndex: 1000 }} />
 
       <Box sx={{ px: { xs: 2, md: 4, lg: 8 }, py: 6 }} data-scroll-section>
@@ -120,15 +122,15 @@ export default function Dashboard() {
                 getOptionLabel={(opt) => `${opt.label} (${opt.code})`}
                 sx={{ width: { xs: 240, md: 450 } }}
                 renderInput={(params) => (
-                  <TextField 
-                    {...params} 
-                    variant="standard" 
-                    sx={{ px: 2, "& .MuiInputBase-root": { color: "white", fontSize: '1.1rem' } }} 
-                    slotProps={{
-                      input: {
-                        ...params.InputProps,
-                        disableUnderline: true
-                      }
+                  <TextField
+                    {...params}
+                    variant="standard"
+                    sx={{ 
+                      px: 2, 
+                      "& .MuiInputBase-root": { color: "text.primary", fontSize: '1.1rem' },
+                      "& .MuiInput-underline:before": { borderBottom: "none !important" },
+                      "& .MuiInput-underline:after": { borderBottom: "none !important" },
+                      "& .MuiInput-underline:hover:not(.Mui-disabled):before": { borderBottom: "none !important" }
                     }}
                   />
                 )}
@@ -191,7 +193,7 @@ export default function Dashboard() {
                 <Typography variant="h6" fontWeight="bold">Risk Protocol</Typography>
               </Box>
               <Typography variant="body2" sx={{ color: "rgba(255,255,255,0.6)", lineHeight: 1.8 }}>
-                The AI identifies a <b style={{ color: '#fff' }}>{metrics.risk}</b> risk state. Volatility clusters detected for {selectedStock.label}.
+                The AI identifies a <Box component="b" sx={{ color: 'text.primary' }}>{metrics.risk}</Box> risk state. Volatility clusters detected for {selectedStock.label}.
               </Typography>
             </Paper>
           </Grid>
@@ -203,7 +205,7 @@ export default function Dashboard() {
               </Box>
               <Box sx={{ mb: 1, display: 'flex', justifyContent: 'space-between' }}>
                 <Typography variant="caption" color="gray">Pattern Matching</Typography>
-                <Typography variant="caption" color="white">{metrics.accuracy}%</Typography>
+                <Typography variant="caption" sx={{ color: "text.primary" }}>{metrics.accuracy}%</Typography>
               </Box>
               <Box sx={{ width: '100%', height: 6, bgcolor: 'rgba(255,255,255,0.1)', borderRadius: 3, overflow: 'hidden' }}>
                 <motion.div initial={{ width: 0 }} whileInView={{ width: `${metrics.accuracy}%` }} transition={{ duration: 1, delay: 0.5 }}

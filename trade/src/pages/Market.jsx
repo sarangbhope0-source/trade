@@ -84,8 +84,8 @@ export default function Market() {
               sx={{
                 p: 3,
                 borderRadius: 4,
-                color: "#fff",
-                background: "linear-gradient(135deg, #0f2027, #2c5364)"
+                color: (theme) => theme.palette.mode === 'dark' ? "#fff" : "text.primary",
+                background: (theme) => theme.palette.mode === 'dark' ? "linear-gradient(135deg, #0f2027, #2c5364)" : "linear-gradient(135deg, #f1f5f9, #e2e8f0)"
               }}
             >
               <Typography variant="h6" sx={{ mb: 2 }}>
@@ -117,8 +117,8 @@ export default function Market() {
               sx={{
                 p: 3,
                 borderRadius: 4,
-                background: "linear-gradient(135deg, #1d2671, #c33764)",
-                color: "#fff"
+                background: (theme) => theme.palette.mode === 'dark' ? "linear-gradient(135deg, #1d2671, #c33764)" : "linear-gradient(135deg, #fce7f3, #fbcfe8)",
+                color: (theme) => theme.palette.mode === 'dark' ? "#fff" : "text.primary"
               }}
             >
               <Typography variant="h6" sx={{ mb: 2 }}>
@@ -142,8 +142,8 @@ export default function Market() {
                 p: 3,
                 borderRadius: 4,
                 backdropFilter: "blur(10px)",
-                background: "rgba(255,255,255,0.05)",
-                color: "#fff"
+                background: (theme) => theme.palette.mode === 'dark' ? "rgba(255,255,255,0.05)" : "rgba(0,0,0,0.05)",
+                color: "text.primary"
               }}
             >
               <Typography variant="h6" sx={{ mb: 2 }}>

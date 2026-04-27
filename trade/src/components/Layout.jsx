@@ -15,7 +15,7 @@ export default function Layout({ children }) {
 
   return (
     <Box sx={{ display: "flex" }}>
-      <AppBar position="fixed" sx={{ zIndex: 1300, bgcolor: "#151921", borderBottom: "1px solid #2d3748" }} elevation={0}>
+      <AppBar position="fixed" sx={{ zIndex: 1300, bgcolor: "background.paper", borderBottom: "1px solid", borderColor: "divider" }} elevation={0}>
         <Toolbar sx={{ justifyContent: "space-between" }}>
           <Typography variant="h6" sx={{ fontWeight: 800, color: "#6366f1" }}>
             NEXUS TRADE
@@ -30,8 +30,9 @@ export default function Layout({ children }) {
           width: drawerWidth, 
           "& .MuiDrawer-paper": { 
             width: drawerWidth, 
-            bgcolor: "#0b0e14", 
-            borderRight: "1px solid #2d3748" 
+            bgcolor: "background.default", 
+            borderRight: "1px solid",
+            borderColor: "divider"
           } 
         }}
       >
@@ -41,14 +42,14 @@ export default function Layout({ children }) {
             <ListItem key={item.text} disablePadding>
               <ListItemButton onClick={() => navigate(item.path)}>
                 <ListItemIcon sx={{ color: "#6366f1" }}>{item.icon}</ListItemIcon>
-                <ListItemText primary={item.text} sx={{ color: 'white' }} />
+                <ListItemText primary={item.text} sx={{ color: 'text.primary' }} />
               </ListItemButton>
             </ListItem>
           ))}
         </List>
       </Drawer>
 
-      <Box component="main" sx={{ flexGrow: 1, p: 3, bgcolor: "#0b0e14", minHeight: "100vh" }}>
+      <Box component="main" sx={{ flexGrow: 1, p: 3, bgcolor: "background.default", minHeight: "100vh" }}>
         <Toolbar />
         {children}
       </Box>

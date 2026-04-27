@@ -4,19 +4,22 @@ import Dashboard from "./pages/Dashboard";
 import Market from "./pages/Market";
 import Portfolio from "./pages/Portfolio";
 import Settings from "./pages/Settings";
+import ThemeContextComponent from "./context/ThemeContext";
 
 function App() {
   return (
-    <BrowserRouter>
-      <Layout>
-        <Routes>
-          <Route path="/" element={<Dashboard />} />
-          <Route path="/market" element={<Market />} />
-          <Route path="/portfolio" element={<Portfolio />} />
-          <Route path="/settings" element={<Settings />} />
-        </Routes>
-      </Layout>
-    </BrowserRouter>
+    <ThemeContextComponent>
+      <BrowserRouter>
+        <Layout>
+          <Routes>
+            <Route path="/" element={<Dashboard />} />
+            <Route path="/market" element={<Market />} />
+            <Route path="/portfolio" element={<Portfolio />} />
+            <Route path="/settings" element={<Settings />} />
+          </Routes>
+        </Layout>
+      </BrowserRouter>
+    </ThemeContextComponent>
   );
 }
 

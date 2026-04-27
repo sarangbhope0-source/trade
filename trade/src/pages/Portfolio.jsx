@@ -47,8 +47,8 @@ export default function Portfolio() {
               sx={{
                 p: 3,
                 borderRadius: 4,
-                color: "#fff",
-                background: "linear-gradient(135deg, #0f2027, #2c5364)"
+                color: (theme) => theme.palette.mode === 'dark' ? "#fff" : "text.primary",
+                background: (theme) => theme.palette.mode === 'dark' ? "linear-gradient(135deg, #0f2027, #2c5364)" : "linear-gradient(135deg, #f1f5f9, #e2e8f0)"
               }}
             >
               <Typography variant="subtitle2">Total Balance</Typography>
@@ -69,8 +69,8 @@ export default function Portfolio() {
               sx={{
                 p: 3,
                 borderRadius: 4,
-                color: "#fff",
-                background: "linear-gradient(135deg, #1d2671, #c33764)"
+                color: (theme) => theme.palette.mode === 'dark' ? "#fff" : "text.primary",
+                background: (theme) => theme.palette.mode === 'dark' ? "linear-gradient(135deg, #1d2671, #c33764)" : "linear-gradient(135deg, #fce7f3, #fbcfe8)"
               }}
             >
               <Typography variant="subtitle2">Assets</Typography>
@@ -92,8 +92,8 @@ export default function Portfolio() {
                 p: 3,
                 borderRadius: 4,
                 backdropFilter: "blur(10px)",
-                background: "rgba(255,255,255,0.05)",
-                color: "#fff"
+                background: (theme) => theme.palette.mode === 'dark' ? "rgba(255,255,255,0.05)" : "rgba(0,0,0,0.05)",
+                color: "text.primary"
               }}
             >
               <Typography variant="h6" sx={{ mb: 2 }}>
@@ -125,8 +125,8 @@ export default function Portfolio() {
               sx={{
                 p: 3,
                 borderRadius: 4,
-                background: "linear-gradient(135deg, #134e5e, #71b280)",
-                color: "#fff"
+                background: (theme) => theme.palette.mode === 'dark' ? "linear-gradient(135deg, #134e5e, #71b280)" : "linear-gradient(135deg, #d1fae5, #a7f3d0)",
+                color: (theme) => theme.palette.mode === 'dark' ? "#fff" : "text.primary"
               }}
             >
               <Typography variant="h6">Stocks</Typography>
@@ -142,8 +142,8 @@ export default function Portfolio() {
               sx={{
                 p: 3,
                 borderRadius: 4,
-                background: "linear-gradient(135deg, #42275a, #734b6d)",
-                color: "#fff"
+                background: (theme) => theme.palette.mode === 'dark' ? "linear-gradient(135deg, #42275a, #734b6d)" : "linear-gradient(135deg, #f3e8ff, #e9d5ff)",
+                color: (theme) => theme.palette.mode === 'dark' ? "#fff" : "text.primary"
               }}
             >
               <Typography variant="h6">Crypto</Typography>

@@ -6,12 +6,12 @@ export default function TradeChart({ data, title }) {
 
   return (
     // FIX: Added aspect and minHeight to the outer box
-    <Box sx={{ width: "100%", height: "100%", display: "flex", flexDirection: "column", minHeight: '350px' }}>
+    <Box sx={{ width: "100%", height: "350px", display: "flex", flexDirection: "column" }}>
       {title && <Typography variant="h6" sx={{ mb: 2, color: "white", fontWeight: 700 }}>{title}</Typography>}
       
       <Box sx={{ flexGrow: 1, width: '100%', height: '100%', minHeight: '350px', position: 'relative' }}>
         {hasData ? (
-          <ResponsiveContainer width="100%" height="100%" minHeight={350}> 
+          <ResponsiveContainer width="100%" height={350}> 
             <AreaChart data={data} margin={{ top: 10, right: 10, left: -20, bottom: 0 }}>
               <defs>
                 <linearGradient id="colorPrice" x1="0" y1="0" x2="0" y2="1">
